@@ -2,8 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 import 'normalize.css'
 import './border-box.css'
+import {useState} from "react";
 
 function App() {
+
+  const [input,setInput] = useState("");
+  const [chatLog,setChatLog] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setChatLog([...chatLog,{user: "me", message: input}])
+    setInput("");
+    console.log(chatLog);
+  }
+
   return (
     <div className="App">
       <aside className="sidemenu">
@@ -48,11 +60,16 @@ function App() {
           </div>
         </div>
         <div className="chat-input-holder">
-          <textarea
-            rows="1"
-            className="chat-input-textarea"
-            placeholder="type your messsage here">
-          </textarea>
+          <form onSubmit={handleSubmit}>
+            <input
+              rows="1"
+              name= "message"
+              value={input}
+              onChange={(event) => {setInput(event.target.value)}}
+              className="chat-input-textarea"
+              placeholder="type your messsage here">
+            </input>
+          </form>
         </div>
       </section>
 
