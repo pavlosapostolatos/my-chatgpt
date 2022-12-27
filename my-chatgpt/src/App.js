@@ -11,11 +11,32 @@ class App extends Component {
     chatLog : []
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({chatLog:[... this.state.chatLog, {user: "me", message:  this.state.input}]})
-    this.setState({input:""})
-    console.log(this.state.chatLog);
+  handleSubmit = async e => {
+      e.preventDefault();
+      this.setState({
+          chatLog: [...this.state.chatLog,
+              {user: "me", message: this.state.input}]
+      })
+      this.setState({input: ""})
+      console.log(this.state.chatLog);
+
+      const response = await fetch("http://localhost:4000", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin" : "*"
+          },
+          body: JSON.stringify({
+              message: this.state.chatLog.map(
+                  (message) => message.message).join("")
+          })
+      });
+      const data = await response.json();
+      console.log(data);
+      this.setState({
+          chatLog: [...this.state.chatLog,
+              {user: "gpt", message: data.message}]
+      })
   }
 
   render() {
