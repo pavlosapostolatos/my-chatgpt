@@ -3,10 +3,12 @@ const { Configuration, OpenAIApi } =  require ("openai");
 const express = require('express');
 const Joi = require('joi');
 const multer = require('multer');
-const cors = require('cors')
-const mysql = require('mysql')
+const cors = require('cors');
+const mysql = require('mysql');
+const bodyParser =  require('body-parser');
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
 
 
 const fetch = import("node-fetch");

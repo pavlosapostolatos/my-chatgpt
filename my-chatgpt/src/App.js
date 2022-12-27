@@ -33,8 +33,8 @@ class App extends Component {
           </aside>
           <section className="chatbox">
             <div className="chat-log">
-              <ChatMessage key={1} message={{user: "me", message: "human"}} />
-              <ChatMessage key={2} message={{user: "gpt", message: "AI"}} />
+                {this.state.chatLog.map((message, index) => <ChatMessage key={index} message={message} /> )}
+              <ChatMessage key={1000} message={{user: "gpt", message: "AI"}} />
             </div>
             <div className="chat-input-holder">
               <form onSubmit={this.handleSubmit}>
