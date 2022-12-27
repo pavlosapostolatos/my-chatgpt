@@ -49,7 +49,7 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
     const {message} = req.body;
     const  completion = await callApi (message);
-    console.log(completion.data.choices[0].text);
+    console.log(completion.data.choices);
     return res.json({
         message: completion.data.choices[0].text
     })

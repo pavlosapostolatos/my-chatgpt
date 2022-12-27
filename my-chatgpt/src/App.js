@@ -13,11 +13,11 @@ class App extends Component {
 
   handleSubmit = async e => {
       e.preventDefault();
-      this.setState({
+      await this.setState({
           chatLog: [...this.state.chatLog,
               {user: "me", message: this.state.input}]
       })
-      this.setState({input: ""})
+      await this.setState({input: ""})
       console.log(this.state.chatLog);
 
       const response = await fetch("http://localhost:4000", {
@@ -41,16 +41,20 @@ class App extends Component {
 
   render() {
 
-    return (
+      function clearChats() {
+         this.setState({chatLog: []})
+      }
+
+      return (
         <div className="App">
           <aside className="sidemenu">
-            <div className="sidemenu-button">
+            <div className="sidemenu-button" onClick={clearChats}>
           <span className="sidemenu-button-span">
             +
           </span>
               New Chat
 
-            </div>
+        </div>
           </aside>
           <section className="chatbox">
             <div className="chat-log">
